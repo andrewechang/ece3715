@@ -1,6 +1,0 @@
-
-
-
-
-
-Text pushed by Eric 

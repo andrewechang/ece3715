@@ -1,16 +1,7 @@
-ECE 3715 Class GitHub Repository <br>
-Dr. Nir Regev <br>
-
-Group Members: <br>
-Andrew Chang <br>
-Davd FengZheng <br>
-Sikan Fu <br>
-Eric Gonzalez <br>
-
-Mini Project 1 <br>
-Section 1: Completed by Andrew <br>
-Section 2: Completed by Andrew <br>
-Section 3: Completed by Andrew <br>
+Mini Project 1: Probability, Bayes, and Discrete Random Variables<br>
+Section 1: Completed by Andrew (4 bit packet error calculation) <br>
+Section 2: Completed by Andrew (error flagging accuracy %) <br>
+Section 3: Completed by Andrew (coin flip experiment) <br>
 Section 4:  <br>
 Section 5:  <br>
 Section 6:  <br>

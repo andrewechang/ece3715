@@ -30,3 +30,131 @@ def tv_distance(pmf1, pmf2):
     pmf1 = np.asarray(pmf1, dtype=float)
     pmf2 = np.asarray(pmf2, dtype=float)
     return 0.5 * np.sum(np.abs(pmf1 - pmf2))
+
+def attempts_until_clean(q, rng):
+    attempts = 1
+
+    while rng.random() > q:
+        attempts += 1
+
+    return attempts
+
+def run_step7_experiments(N_values, num_runs=200, seed=42):
+    """
+    Run repeated Binomial and Geometric experiments and calculate
+    the running sample means at each value of N.
+    """
+
+    rng = np.random.default_rng(seed)
+
+    # Distribution parameters
+    binom_n = 1000
+    binom_p = 0.005
+    geom_p = 0.7
+
+    N_max = N_values[-1]
+
+    # Storage
+    binom_means = np.zeros((num_runs, len(N_values)))
+    geom_means = np.zeros((num_runs, len(N_values)))
+
+    for run in range(num_runs):
+
+        # Binomial samples
+        binom_samples = rng.binomial(
+            binom_n,
+            binom_p,
+            size=N_max
+        )
+
+        binom_cumsum = np.cumsum(binom_samples)
+
+        binom_means[run, :] = (
+            binom_cumsum[N_values - 1] / N_values
+        )
+
+        # Geometric samples
+        geom_samples = rng.geometric(
+            geom_p,
+            size=N_max
+        )
+
+        geom_cumsum = np.cumsum(geom_samples)
+
+        geom_means[run, :] = (
+            geom_cumsum[N_values - 1] / N_values
+        )
+
+    return binom_means, geom_means
+
+
+def calculate_step7_spread(means):
+    """
+    Calculate the 5th percentile, 95th percentile,
+    and mean across all experiments.
+    """
+
+    low = np.percentile(means, 5, axis=0)
+    high = np.percentile(means, 95, axis=0)
+    center = np.mean(means, axis=0)
+
+    return low, high, center
+
+
+def calculate_envelope(N_values, low, high, match_idx=10):
+    """
+    Calculate a 1/sqrt(N) envelope matched to the
+    observed spread at one checkpoint.
+    """
+
+    half_width = (
+        high[match_idx] - low[match_idx]
+    ) / 2
+
+    C = half_width * np.sqrt(N_values[match_idx])
+
+    envelope = C / np.sqrt(N_values)
+
+    return envelope
+
+
+def find_trials_within_one_percent(
+    N_values,
+    low,
+    high,
+    true_mean
+):
+    """
+    Find the first checkpoint where the entire spread band
+    is within 1% of the true mean.
+    """
+
+    tolerance = 0.01 * true_mean
+
+    lower_target = true_mean - tolerance
+    upper_target = true_mean + tolerance
+
+    within_1_percent = (
+        (low >= lower_target) &
+        (high <= upper_target)
+    )
+
+    if np.any(within_1_percent):
+        first_idx = np.where(within_1_percent)[0][0]
+        needed_N = N_values[first_idx]
+
+        return (
+            needed_N,
+            first_idx,
+            tolerance,
+            lower_target,
+            upper_target
+        )
+
+    return (
+        None,
+        None,
+        tolerance,
+        lower_target,
+        upper_target
+    )

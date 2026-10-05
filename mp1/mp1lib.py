@@ -31,13 +31,16 @@ def tv_distance(pmf1, pmf2):
     pmf2 = np.asarray(pmf2, dtype=float)
     return 0.5 * np.sum(np.abs(pmf1 - pmf2))
 
-def attempts_until_clean(q, rng):
-    attempts = 1
+def attempts_until_clean(n_trials, q, rng):
+    """
+    Draw the number of attempts until the first clean packet.
+    The support is 1, 2, 3, ...
+    q is the per-attempt clean probability.
+    """
+    if n_trials < 0 or not 0 < q <= 1:
+        raise ValueError("n_trials must be nonnegative and q must be in (0, 1]")
 
-    while rng.random() > q:
-        attempts += 1
-
-    return attempts
+    return rng.geometric(q, size=n_trials)
 
 def run_step7_experiments(N_values, num_runs=200, seed=42):
     """

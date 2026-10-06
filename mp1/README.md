@@ -6,5 +6,5 @@ Section 4: Completed by David (Bernoulli trials and Binomial) <br>
 Section 5: Completed by David (Poisson approximation) <br>
 Section 6: Completed by Sikan (Retransmissions and the geometric distribution) <br>
 Section 7: Completed by Sikan ( Expectation, variance, and how fast estimates settle) <br>
-Section 8: To be Completed by Eric Gonzalez<br>
-Section EC: To be Completed by Eric Gonzalez <br>
+Section 8: Completed by Eric Gonzalez (Putting it together, the throughput of the link ) <br>
+Section EC: Completed by Eric Gonzalez (Final Packet Length ) <br>

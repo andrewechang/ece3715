@@ -1,6 +1,6 @@
 Mini Project 2: Continuous Random Variables <br>
-Section 1:  <br>
-Section 2: <br>
+Section 1: Completed by David (CDF to Density) <br>
+Section 2: Completed by David (Inversion Generator) <br>
 Section 3: <br>
 Section 4:  <br>
 Section 5:  <br>

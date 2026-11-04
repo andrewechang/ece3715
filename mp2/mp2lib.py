@@ -36,3 +36,67 @@ def ks_statistic(samples, cdf):
 def q_function(x):
     """Gaussian tail probability Q(x) = P[N(0,1) > x] = 0.5*erfc(x/sqrt(2))."""
     return 0.5 * erfc(np.asarray(x, dtype=float) / np.sqrt(2.0))
+
+
+
+import numpy as np
+from scipy.stats import norm
+
+# CDF of Y = X^2
+def cdf_y(y):
+    y = np.asarray(y)
+    return np.where(
+        y > 0,
+        2 * norm.cdf(np.sqrt(np.maximum(y, 0))) - 1,
+        0
+    )
+
+# PDF of Y = X^2
+def pdf_y(y):
+    y = np.asarray(y)
+    result = np.zeros_like(y, dtype=float)
+
+    positive = y > 0
+
+    result[positive] = (
+        np.exp(-y[positive] / 2)
+        / np.sqrt(2 * np.pi * y[positive])
+    )
+
+    return result
+
+
+
+# Calculate the first four Rayleigh raw moments
+def rayleigh_moments():
+    from math import gamma
+
+    moments = []
+    for k in range(1, 5):
+        moment = (2 ** (k / 2)) * gamma(1 + k / 2)
+        moments.append(moment)
+
+    return moments
+
+
+# Generate Rayleigh and Pareto samples
+def generate_samples(N, seed=42):
+    rng = np.random.default_rng(seed)
+
+    rayleigh = rng.rayleigh(scale=1, size=N)
+    pareto = rng.pareto(a=1.5, size=N) + 1
+
+    return rayleigh, pareto
+
+
+# Calculate running mean and sample variance
+def running_stats(samples, sizes):
+    means = []
+    variances = []
+
+    for N in sizes:
+        data = samples[:N]
+        means.append(np.mean(data))
+        variances.append(np.var(data, ddof=1))
+
+    return means, variances

@@ -1,4 +1,7 @@
 Mini Project 2: Continuous Random Variables <br>
+Seed: 981253769 <br>
+Runtime: 31 seconds <br>
+
 Section 1: Completed by David (CDF to Density) <br>
 Section 2: Completed by David (Inversion Generator) <br>
 Section 3: Completed by Sikan (A function of a random variable) <br>

@@ -8,6 +8,6 @@ Section 4: Completed by David (Linear transformations of random vectors)<br>
 Section 5: Completed by David (The multivariate Gaussian)<br>
 Section 6: Completed by Eric (Eigendecomposition, decorrelation and whitening)<br>
 Section 7: Completed by Eric (The conditional Gaussian)<br>
-Section 8: <br>
-Section Bonus a: <br>
-Section Bonus b: <br>
+Section 8: Completed by Sikan (Fusing two correlated sensors)<br>
+Section Bonus a: Completed by Sikan (generating correlated vectors from scratch)<br>
+Section Bonus b: Completed by Sikan (principal components on real data)<br>

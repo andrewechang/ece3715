@@ -1,5 +1,6 @@
 Mini-Project 3: Random Vectors and the Multivariate Gaussian <br>
 Seed: 2082172357 <br>
+Runtime: 16 seconds <br>
 
 Section 1: Completed by Andrew (Two variables at once)<br>
 Section 2: Completed by Andrew (Uncorrelated does not mean independent)<br>
